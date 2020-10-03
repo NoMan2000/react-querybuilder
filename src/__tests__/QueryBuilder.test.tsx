@@ -11,7 +11,7 @@ import { QueryBuilderProps, RuleGroupType } from '../types';
 describe('<QueryBuilder />', () => {
   const props: QueryBuilderProps = {
     fields: [],
-    onQueryChange: () => null
+    onQueryChange: () => null,
   };
 
   it('should exist', () => {
@@ -96,21 +96,21 @@ describe('<QueryBuilder />', () => {
         {
           field: 'firstName',
           value: 'Test without ID',
-          operator: '='
-        }
-      ]
+          operator: '=',
+        },
+      ],
     };
 
     const fields = [
       { name: 'firstName', label: 'First Name' },
       { name: 'lastName', label: 'Last Name' },
-      { name: 'age', label: 'Age' }
+      { name: 'age', label: 'Age' },
     ];
 
     beforeEach(() => {
       act(() => {
         wrapper = mount(
-          <QueryBuilder {...props} query={queryWithoutID as RuleGroupType} fields={fields} />
+          <QueryBuilder {...props} query={queryWithoutID as RuleGroupType} fields={fields} />,
         );
       });
     });
@@ -156,7 +156,7 @@ describe('<QueryBuilder />', () => {
     let wrapper: ReactWrapper<QueryBuilderProps>;
     const newFields = [
       { name: 'domainName', label: 'Domain Name' },
-      { name: 'ownerName', label: 'Owner Name' }
+      { name: 'ownerName', label: 'Owner Name' },
     ];
 
     const newQuery = {
@@ -166,9 +166,9 @@ describe('<QueryBuilder />', () => {
         {
           field: 'domainName',
           value: 'www.example.com',
-          operator: '!='
-        }
-      ]
+          operator: '!=',
+        },
+      ],
     };
 
     beforeEach(() => {
@@ -190,7 +190,7 @@ describe('<QueryBuilder />', () => {
 
       wrapper.setProps({
         query: newQuery as RuleGroupType,
-        fields: newFields
+        fields: newFields,
       });
       wrapper.update();
 
@@ -209,13 +209,13 @@ describe('<QueryBuilder />', () => {
       { name: 'null', label: 'Custom Is Null' },
       { name: 'notNull', label: 'Is Not Null' },
       { name: 'in', label: 'In' },
-      { name: 'notIn', label: 'Not In' }
+      { name: 'notIn', label: 'Not In' },
     ];
 
     const fields = [
       { name: 'firstName', label: 'First Name' },
       { name: 'lastName', label: 'Last Name' },
-      { name: 'age', label: 'Age' }
+      { name: 'age', label: 'Age' },
     ];
 
     const query = {
@@ -227,14 +227,14 @@ describe('<QueryBuilder />', () => {
           id: '222',
           field: 'firstName',
           value: 'Test',
-          operator: '='
-        }
-      ]
+          operator: '=',
+        },
+      ],
     };
 
     beforeEach(() => {
       wrapper = mount(
-        <QueryBuilder {...props} operators={operators} fields={fields} query={query} />
+        <QueryBuilder {...props} operators={operators} fields={fields} query={query} />,
       );
     });
 
@@ -259,7 +259,7 @@ describe('<QueryBuilder />', () => {
     const fields = [
       { name: 'firstName', label: 'First Name' },
       { name: 'lastName', label: 'Last Name' },
-      { name: 'age', label: 'Age' }
+      { name: 'age', label: 'Age' },
     ];
 
     const query = {
@@ -271,9 +271,9 @@ describe('<QueryBuilder />', () => {
           id: 'r-0123456789',
           field: 'lastName',
           value: 'Another Test',
-          operator: '='
-        }
-      ]
+          operator: '=',
+        },
+      ],
     };
 
     beforeEach(() => {
@@ -281,11 +281,11 @@ describe('<QueryBuilder />', () => {
         return [
           { name: 'custom-operator-1', label: 'Op. 1' },
           { name: 'custom-operator-2', label: 'Op. 2' },
-          { name: 'custom-operator-3', label: 'Op. 3' }
+          { name: 'custom-operator-3', label: 'Op. 3' },
         ];
       });
       wrapper = mount(
-        <QueryBuilder {...props} query={query} fields={fields} getOperators={getOperators} />
+        <QueryBuilder {...props} query={query} fields={fields} getOperators={getOperators} />,
       );
     });
 
@@ -301,7 +301,7 @@ describe('<QueryBuilder />', () => {
     it('should handle invalid getOperators function', () => {
       wrapper.unmount();
       wrapper = mount(
-        <QueryBuilder {...props} query={query} fields={fields} getOperators={() => null} />
+        <QueryBuilder {...props} query={query} fields={fields} getOperators={() => null} />,
       );
       const operators = wrapper.find('.rule-operators option');
       expect(operators.first().props().value).to.equal('null');
@@ -314,7 +314,7 @@ describe('<QueryBuilder />', () => {
     const fields = [
       { name: 'firstName', label: 'First Name' },
       { name: 'lastName', label: 'Last Name' },
-      { name: 'age', label: 'Age' }
+      { name: 'age', label: 'Age' },
     ];
 
     const query = {
@@ -326,9 +326,9 @@ describe('<QueryBuilder />', () => {
           id: 'r-0123456789',
           field: 'lastName',
           value: 'Another Test',
-          operator: '='
-        }
-      ]
+          operator: '=',
+        },
+      ],
     };
 
     beforeEach(() => {
@@ -339,7 +339,7 @@ describe('<QueryBuilder />', () => {
           query={query}
           fields={fields}
           getValueEditorType={getValueEditorType}
-        />
+        />,
       );
     });
 
@@ -355,7 +355,7 @@ describe('<QueryBuilder />', () => {
     it('should handle invalid getValueEditorType function', () => {
       wrapper.unmount();
       wrapper = mount(
-        <QueryBuilder {...props} query={query} fields={fields} getValueEditorType={() => null} />
+        <QueryBuilder {...props} query={query} fields={fields} getValueEditorType={() => null} />,
       );
       const valueEditor = wrapper.find('.rule-value');
       expect(valueEditor.first().props().type).to.equal('text');
@@ -368,7 +368,7 @@ describe('<QueryBuilder />', () => {
     const fields = [
       { name: 'firstName', label: 'First Name' },
       { name: 'lastName', label: 'Last Name' },
-      { name: 'age', label: 'Age' }
+      { name: 'age', label: 'Age' },
     ];
 
     const query = {
@@ -380,15 +380,15 @@ describe('<QueryBuilder />', () => {
           id: 'r-0123456789',
           field: 'lastName',
           value: 'Another Test',
-          operator: '='
-        }
-      ]
+          operator: '=',
+        },
+      ],
     };
 
     beforeEach(() => {
       getInputType = jest.fn(() => 'text');
       wrapper = mount(
-        <QueryBuilder {...props} query={query} fields={fields} getInputType={getInputType} />
+        <QueryBuilder {...props} query={query} fields={fields} getInputType={getInputType} />,
       );
     });
 
@@ -404,7 +404,7 @@ describe('<QueryBuilder />', () => {
     it('should handle invalid getInputType function', () => {
       wrapper.unmount();
       wrapper = mount(
-        <QueryBuilder {...props} query={query} fields={fields} getInputType={() => null} />
+        <QueryBuilder {...props} query={query} fields={fields} getInputType={() => null} />,
       );
       const valueEditor = wrapper.find('.rule-value');
       expect(valueEditor.first().props().type).to.equal('text');
@@ -418,7 +418,7 @@ describe('<QueryBuilder />', () => {
     const fields = [
       { name: 'firstName', label: 'First Name' },
       { name: 'lastName', label: 'Last Name' },
-      { name: 'age', label: 'Age' }
+      { name: 'age', label: 'Age' },
     ];
 
     const query = {
@@ -430,9 +430,9 @@ describe('<QueryBuilder />', () => {
           id: 'r-0123456789',
           field: 'lastName',
           value: 'Another Test',
-          operator: '='
-        }
-      ]
+          operator: '=',
+        },
+      ],
     };
 
     beforeEach(() => {
@@ -444,7 +444,7 @@ describe('<QueryBuilder />', () => {
           fields={fields}
           getValueEditorType={getValueEditorType}
           getValues={getValues}
-        />
+        />,
       );
     });
 
@@ -465,7 +465,7 @@ describe('<QueryBuilder />', () => {
     it('should handle invalid getValues function', () => {
       wrapper.unmount();
       wrapper = mount(
-        <QueryBuilder {...props} query={query} fields={fields} getValues={() => null} />
+        <QueryBuilder {...props} query={query} fields={fields} getValues={() => null} />,
       );
       const select = wrapper.find('.rule-value');
       expect(select.length).to.be.greaterThan(0);
@@ -478,7 +478,7 @@ describe('<QueryBuilder />', () => {
     let wrapper: ReactWrapper, onQueryChange;
     const fields = [
       { name: 'field1', label: 'Field 1' },
-      { name: 'field2', label: 'Field 2' }
+      { name: 'field2', label: 'Field 2' },
     ];
 
     beforeEach(() => {
@@ -556,17 +556,19 @@ describe('<QueryBuilder />', () => {
           if (field === 'field1') {
             return [
               { name: 'value1', label: 'Value 1' },
-              { name: 'value2', label: 'Value 2' }
+              { name: 'value2', label: 'Value 2' },
             ];
           }
 
           return [];
         },
         getValueEditorType: (field) => {
-          if (field === 'field2') return 'checkbox';
+          if (field === 'field2') {
+            return 'checkbox';
+          }
 
           return 'text';
-        }
+        },
       });
 
       wrapper.find('.ruleGroup-addRule').first().simulate('click');
@@ -586,10 +588,12 @@ describe('<QueryBuilder />', () => {
         fields: fields.slice(1),
         onQueryChange,
         getValueEditorType: (field) => {
-          if (field === 'field2') return 'checkbox';
+          if (field === 'field2') {
+            return 'checkbox';
+          }
 
           return 'text';
-        }
+        },
       });
 
       wrapper.find('.ruleGroup-addRule').first().simulate('click');
@@ -603,7 +607,7 @@ describe('<QueryBuilder />', () => {
     let wrapper: ReactWrapper, onQueryChange;
     const fields = [
       { name: 'field1', label: 'Field 1' },
-      { name: 'field2', label: 'Field 2' }
+      { name: 'field2', label: 'Field 2' },
     ];
 
     beforeEach(() => {
@@ -664,7 +668,7 @@ describe('<QueryBuilder />', () => {
     let wrapper: ReactWrapper, onQueryChange;
     const fields = [
       { name: 'field1', label: 'Field 1' },
-      { name: 'field2', label: 'Field 2' }
+      { name: 'field2', label: 'Field 2' },
     ];
 
     beforeEach(() => {

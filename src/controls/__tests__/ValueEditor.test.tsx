@@ -7,7 +7,7 @@ import { ValueEditor } from '..';
 describe('<ValueEditor />', () => {
   const props = {
     handleOnChange: () => null,
-    level: 0
+    level: 0,
   };
 
   it('should exist', () => {
@@ -49,7 +49,7 @@ describe('<ValueEditor />', () => {
   describe('when rendering a select', () => {
     it('should render the correct number of options', () => {
       const wrapper = mount(
-        <ValueEditor {...props} type="select" values={[{ name: 'test', label: 'Test' }]} />
+        <ValueEditor {...props} type="select" values={[{ name: 'test', label: 'Test' }]} />,
       );
 
       const select = wrapper.find('select');
@@ -67,7 +67,7 @@ describe('<ValueEditor />', () => {
           type="select"
           handleOnChange={handleOnChange}
           values={[{ name: 'test', label: 'Test' }]}
-        />
+        />,
       );
 
       const select = wrapper.find('select');
@@ -80,7 +80,7 @@ describe('<ValueEditor />', () => {
     it('should render the checkbox and react to changes', () => {
       const handleOnChange = sinon.spy();
       const wrapper = mount(
-        <ValueEditor {...props} type="checkbox" handleOnChange={handleOnChange} />
+        <ValueEditor {...props} type="checkbox" handleOnChange={handleOnChange} />,
       );
 
       const checkbox = wrapper.find('input[type="checkbox"]');
@@ -94,7 +94,7 @@ describe('<ValueEditor />', () => {
   describe('when rendering a radio button set', () => {
     it('should render the radio buttons with labels', () => {
       const wrapper = mount(
-        <ValueEditor {...props} type="radio" values={[{ name: 'test', label: 'Test' }]} />
+        <ValueEditor {...props} type="radio" values={[{ name: 'test', label: 'Test' }]} />,
       );
 
       const input = wrapper.find('label input[type="radio"]');
@@ -109,7 +109,7 @@ describe('<ValueEditor />', () => {
           type="radio"
           handleOnChange={handleOnChange}
           values={[{ name: 'test', label: 'Test' }]}
-        />
+        />,
       );
 
       const input = wrapper.find('input');

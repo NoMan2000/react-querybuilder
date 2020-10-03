@@ -6,13 +6,13 @@ describe('isRuleGroup', () => {
     id: 'r-01234',
     field: 'test',
     operator: '=',
-    value: 'test value'
+    value: 'test value',
   };
 
   const ruleGroup = {
     id: 'g-01234',
     combinator: 'and',
-    rules: []
+    rules: [],
   };
 
   it('identifies a rule', () => {

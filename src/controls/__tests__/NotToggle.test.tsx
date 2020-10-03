@@ -6,7 +6,7 @@ import { NotToggle } from '..';
 describe('<NotToggle />', () => {
   const props = {
     handleOnChange: () => null,
-    level: 0
+    level: 0,
   };
 
   it('should exist', () => {

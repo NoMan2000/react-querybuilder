@@ -11,12 +11,12 @@ const generateValidQuery = (query: RuleGroupType | RuleType): RuleGroupType | Ru
       id: query.id || `g-${nanoid()}`,
       rules: query.rules.map((rule) => generateValidQuery(rule)),
       combinator: query.combinator,
-      not: !!query.not
+      not: !!query.not,
     };
   }
   return {
     id: query.id || `r-${nanoid()}`,
-    ...query
+    ...query,
   };
 };
 

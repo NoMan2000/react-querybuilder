@@ -12,9 +12,9 @@ describe('generateValidQuery', () => {
           id: 'r-12345',
           field: 'firstName',
           value: 'Test',
-          operator: '='
-        }
-      ]
+          operator: '=',
+        },
+      ],
     };
 
     it('should not generate new ID if query provides ID', () => {
@@ -31,9 +31,9 @@ describe('generateValidQuery', () => {
         {
           field: 'firstName',
           value: 'Test without ID',
-          operator: '='
-        }
-      ]
+          operator: '=',
+        },
+      ],
     };
 
     it('should generate IDs if missing in query', () => {

@@ -12,7 +12,7 @@ if (!globalThis.crypto) {
 
 type Params = {
   sql: string;
-  params: string[]
+  params: string[];
 };
 
 /**
@@ -35,11 +35,13 @@ export default function App() {
   const [query, setQuery] = React.useState<RuleGroupType>({
     id: 'app',
     combinator: 'and',
-    rules: [{
-      field: 'app',
-      operator: 'and',
-      value: 'app'
-    }]
+    rules: [
+      {
+        field: 'app',
+        operator: 'and',
+        value: 'app',
+      },
+    ],
   });
   const [sqlQuery, setSqlQuery] = React.useState<Params>();
 
@@ -48,29 +50,30 @@ export default function App() {
     setSqlQuery(rulesSet);
     debugger;
     setQuery(query);
-  }
+  };
 
   return (
     <View style={styles.container}>
       <View>
         <Text>Main App Entry</Text>
       </View>
-      <QueryBuilder fields={[
-      { name: 'firstName', label: 'First Name' },
-      { name: 'lastName', label: 'Last Name' },
-      { name: 'age', label: 'Age' },
-    ]}
-      query={query}
-      onQueryChange={handleQuery} />
+      <QueryBuilder
+        fields={[
+          { name: 'firstName', label: 'First Name' },
+          { name: 'lastName', label: 'Last Name' },
+          { name: 'age', label: 'Age' },
+        ]}
+        query={query}
+        onQueryChange={handleQuery}
+      />
       <StatusBar style="auto" />
       <View style={styles.horizontalContainer}>
         <Text>{sqlQuery?.sql}</Text>
         <View style={styles.horizontalContainer}>
-          {sqlQuery?.params && sqlQuery.params.map(p => {
-            return (
-              <Text key={p}>{p}</Text>
-            )
-          })}
+          {sqlQuery?.params &&
+            sqlQuery.params.map((p) => {
+              return <Text key={p}>{p}</Text>;
+            })}
         </View>
       </View>
     </View>
@@ -88,5 +91,5 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     flexDirection: 'row',
-  }
+  },
 });

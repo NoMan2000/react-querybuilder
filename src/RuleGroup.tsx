@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { StyleSheet, View, NativeSyntheticEvent, NativeTouchEvent } from 'react-native';
 import { RuleGroupProps } from './types';
 
@@ -9,10 +9,9 @@ export const RuleGroup: React.FC<RuleGroupProps> = ({
   rules = [],
   translations,
   schema,
-  not
+  not,
 }) => {
   const {
-    classNames,
     combinators,
     controls,
     createRule,
@@ -24,7 +23,7 @@ export const RuleGroup: React.FC<RuleGroupProps> = ({
     onPropChange,
     onRuleAdd,
     showCombinatorsBetweenRules,
-    showNotToggle
+    showNotToggle,
   } = schema;
 
   const hasParentGroup = () => !!parentId;
@@ -38,20 +37,20 @@ export const RuleGroup: React.FC<RuleGroupProps> = ({
   };
 
   const addRule = (event: NativeSyntheticEvent<NativeTouchEvent>) => {
-    console.log({event, from: 'addRule' });
+    console.log('addRule', { event });
     const newRule = createRule();
     onRuleAdd(newRule, id);
   };
 
   const addGroup = (event: NativeSyntheticEvent<NativeTouchEvent>) => {
-
+    console.log('removeGroup', { event });
     const newGroup = createRuleGroup();
     onGroupAdd(newGroup, id);
   };
 
   const removeGroup = (event: NativeSyntheticEvent<NativeTouchEvent>) => {
-
-    onGroupRemove(id, parentId || /* istanbul ignore next */ '');
+    console.log('removeGroup', { event });
+    onGroupRemove(id, parentId);
   };
 
   const level = getLevel(id);
@@ -143,7 +142,7 @@ export const RuleGroup: React.FC<RuleGroupProps> = ({
 
 RuleGroup.displayName = 'RuleGroup';
 export const styles = StyleSheet.create({
-  container:{},
+  container: {},
   header: {},
-  combinatorSelector: {}
-})
+  combinatorSelector: {},
+});

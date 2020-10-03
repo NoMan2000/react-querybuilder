@@ -10,13 +10,13 @@ describe('findRule', () => {
         id: '222',
         field: 'firstName',
         value: 'Test',
-        operator: '='
+        operator: '=',
       },
       {
         id: '333',
         field: 'firstName',
         value: 'Test',
-        operator: '='
+        operator: '=',
       },
       {
         combinator: 'and',
@@ -26,11 +26,11 @@ describe('findRule', () => {
             id: '555',
             field: 'firstName',
             value: 'Test',
-            operator: '='
-          }
-        ]
-      }
-    ]
+            operator: '=',
+          },
+        ],
+      },
+    ],
   };
 
   it('should find a root rule', () => {

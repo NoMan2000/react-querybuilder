@@ -93,7 +93,7 @@ const formatQuery = (ruleGroup: RuleGroupType, options?: FormatQueryOptions | Ex
           splitValue.forEach((v) => params.push(v));
           return `${quoteFieldNamesWith}${
             rule.field
-          }${quoteFieldNamesWith} ${operator} (${splitValue.map((v) => '?').join(', ')})`;
+          }${quoteFieldNamesWith} ${operator} (${splitValue.map(() => '?').join(', ')})`;
         }
 
         params.push((value as string).match(/^'?(.*?)'?$/)![1]);

@@ -6,7 +6,7 @@ import { ValueSelector } from '..';
 describe('<ValueSelector />', () => {
   const props = {
     handleOnChange: () => null,
-    level: 0
+    level: 0,
   };
 
   it('should exist', () => {
@@ -16,7 +16,7 @@ describe('<ValueSelector />', () => {
   describe('when using default rendering', () => {
     const options = [
       { name: 'foo', label: 'foo label' },
-      { name: 'bar', label: 'bar label' }
+      { name: 'bar', label: 'bar label' },
     ];
 
     it('should have an <select /> element', () => {
@@ -56,7 +56,7 @@ describe('<ValueSelector />', () => {
 
     const options = [
       { name: 'foo', label: 'foo label', id: fooId },
-      { name: 'bar', label: 'bar label', id: barId }
+      { name: 'bar', label: 'bar label', id: barId },
     ];
 
     it('the options should have keys 3 and 5', () => {

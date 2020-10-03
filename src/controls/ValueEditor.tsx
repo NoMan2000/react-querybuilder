@@ -27,7 +27,7 @@ export const textToBoolean = (value: string | boolean): boolean => {
   }
   console.error('Text to boolean fails with value of ' + value);
   return false;
-}
+};
 
 const ValueEditor: React.FC<ValueEditorProps> = ({
   operator,
@@ -35,9 +35,8 @@ const ValueEditor: React.FC<ValueEditorProps> = ({
   handleOnChange,
   title,
   type,
-  inputType,
   disabled = false,
-  values
+  values,
 }) => {
   if (operator === 'null' || operator === 'notNull') {
     return null;
@@ -48,14 +47,14 @@ const ValueEditor: React.FC<ValueEditorProps> = ({
       return (
         <View>
           <View>{title}</View>
-        <Picker
-          style={styles.select}
-          onValueChange={(itemValue, itemIndex) => handleOnChange(itemValue, itemIndex)}
-          selectedValue={value}>
-          {values!.map((v) => (
-            <Picker.Item label={v.label} value={v.value} />
-          ))}
-        </Picker>
+          <Picker
+            style={styles.select}
+            onValueChange={(itemValue, itemIndex) => handleOnChange(itemValue, itemIndex)}
+            selectedValue={value}>
+            {values!.map((v) => (
+              <Picker.Item label={v.label} value={v.value} />
+            ))}
+          </Picker>
         </View>
       );
 
@@ -65,11 +64,11 @@ const ValueEditor: React.FC<ValueEditorProps> = ({
           <View>
             <Text>{title}</Text>
           </View>
-        <CheckBox
-          disabled={disabled}
-          isChecked={!!value}
-          onClick={() => handleOnChange(boolToText(!value))}
-        />
+          <CheckBox
+            disabled={disabled}
+            isChecked={!!value}
+            onClick={() => handleOnChange(boolToText(!value))}
+          />
         </View>
       );
 
@@ -80,12 +79,14 @@ const ValueEditor: React.FC<ValueEditorProps> = ({
 
           {values!.map((v) => (
             <View>
-            <RadioButton
-              key={v.name}
-              onPress={(e: GestureResponderEvent) => handleOnChange(e.target)}
-              checked={value === v.name}
+              <RadioButton
+                key={v.name}
+                onPress={(e: GestureResponderEvent) => handleOnChange(e.target)}
+                checked={value === v.name}
               />
-              <View><Text>{v.label}</Text></View>
+              <View>
+                <Text>{v.label}</Text>
+              </View>
             </View>
           ))}
         </View>
@@ -94,11 +95,10 @@ const ValueEditor: React.FC<ValueEditorProps> = ({
     default:
       return (
         <View>
-          <View><Text>{title}</Text></View>
-        <TextInput
-          value={value}
-          onChange={(e) => handleOnChange(e.target)}
-        />
+          <View>
+            <Text>{title}</Text>
+          </View>
+          <TextInput value={value} onChange={(e) => handleOnChange(e.target)} />
         </View>
       );
   }
@@ -107,7 +107,7 @@ const ValueEditor: React.FC<ValueEditorProps> = ({
 ValueEditor.displayName = 'ValueEditor';
 
 export const styles = StyleSheet.create({
-  select: {}
-})
+  select: {},
+});
 
 export default ValueEditor;

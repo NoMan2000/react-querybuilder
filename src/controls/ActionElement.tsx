@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Button, View, Text } from 'react-native';
 import { ActionProps } from '../types';
 
-const ActionElement: React.FC<ActionProps> = ({ handleOnClick, label= '', title= '' }) => (
+const ActionElement: React.FC<ActionProps> = ({ handleOnClick, label = '', title = '' }) => (
   <View>
     <View>
       <Text>{title}</Text>
@@ -18,7 +18,7 @@ const ActionElement: React.FC<ActionProps> = ({ handleOnClick, label= '', title=
 
 ActionElement.displayName = 'ActionElement';
 export const styles = StyleSheet.create({
-  button: {}
-})
+  button: {},
+});
 
 export default ActionElement;

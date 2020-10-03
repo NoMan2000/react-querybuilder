@@ -7,8 +7,8 @@ describe('<ActionElement />', () => {
   const props = {
     handleOnClick: () => null,
     className: '',
-    level: 0
-  }
+    level: 0,
+  };
 
   it('should exist', () => {
     expect(ActionElement).to.exist;

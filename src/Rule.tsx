@@ -1,7 +1,8 @@
+/* eslint-disable no-debugger */
 import arrayFind from 'array-find';
 import React from 'react';
 import { View, StyleSheet, NativeSyntheticEvent, NativeTouchEvent } from 'react-native';
-import { RuleProps, Field } from './types';
+import { RuleProps } from './types';
 
 export const Rule: React.FC<RuleProps> = ({
   id,
@@ -19,29 +20,33 @@ export const Rule: React.FC<RuleProps> = ({
     getValueEditorType,
     getValues,
     onPropChange,
-    onRuleRemove
-  }
+    onRuleRemove,
+  },
 }) => {
-  const onElementChanged = (property: string, value: any) => {
-    console.log('onElementChanged', { property, value });
-    onPropChange(property, value, id);
+  const onElementChanged = (property: string, passedValue: any) => {
+    debugger;
+    console.log('onElementChanged', { property, value, passedValue });
+    onPropChange(property, passedValue, id);
   };
 
-  const onFieldChanged = (value: any) => {
-    console.log('onFieldChanged', value);
-    onElementChanged('field', value);
+  const onFieldChanged = (passedValue: any) => {
+    debugger;
+    console.log('onFieldChanged', { value, passedValue });
+    onElementChanged('field', passedValue);
   };
 
-  const onOperatorChanged = (value: any) => {
-    console.log('onOperatorChanged', value);
-    onElementChanged('operator', value);
+  const onOperatorChanged = (passedValue: any) => {
+    debugger;
+    console.log('onOperatorChanged', { value, passedValue });
+    onElementChanged('operator', passedValue);
   };
 
-  const onValueChanged = (value: { value: string }) => {
-    onElementChanged('value', value.value);
+  const onValueChanged = (passedValue: { value: string }) => {
+    debugger;
+    onElementChanged('onValueChanged', { passedValue: passedValue.value, value });
   };
 
-  const removeRule = (ev: NativeSyntheticEvent<NativeTouchEvent>, fieldName: string, field?: Field) => {
+  const removeRule = () => {
     onRuleRemove(id, parentId);
   };
 
@@ -89,7 +94,9 @@ export const Rule: React.FC<RuleProps> = ({
           label={translations.removeRule.label}
           title={translations.removeRule.title}
           style={styles.removeRuleAction}
-          handleOnClick={(ev: NativeSyntheticEvent<NativeTouchEvent>) => { removeRule(ev, field, fieldData) }}
+          handleOnClick={(ev: NativeSyntheticEvent<NativeTouchEvent>) => {
+            removeRule(ev, field, fieldData);
+          }}
           level={level}
         />
       </View>
@@ -103,15 +110,15 @@ export const styles = StyleSheet.create({
   header: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   container: {
     flex: 1,
     flexDirection: 'row',
-    margin: '10 5'
+    margin: '10 5',
   },
   fieldSelector: {
-    margin: '10 10'
+    margin: '10 10',
   },
   operatorSelector: {},
   valueEditor: {},
@@ -119,7 +126,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-between',
-    alignContent: 'space-between'
+    alignContent: 'space-between',
   },
-  removeRuleAction: {}
+  removeRuleAction: {},
 });

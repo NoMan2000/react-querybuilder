@@ -25,33 +25,33 @@ describe('<Rule />', () => {
       valueEditor: (props) => (
         <input type="text" onChange={(e) => props.handleOnChange(e.target.value)} />
       ),
-      removeRuleAction: (props) => <button onClick={(e) => props.handleOnClick(e)}>x</button>
+      removeRuleAction: (props) => <button onClick={(e) => props.handleOnClick(e)}>x</button>,
     };
     classNames = {
       fields: 'custom-fields-class',
       operators: 'custom-operators-class',
-      removeRule: 'custom-removeRule-class'
+      removeRule: 'custom-removeRule-class',
     };
     schema = {
       fields: [
         { name: 'field1', label: 'Field 1' },
-        { name: 'field2', label: 'Field 2' }
+        { name: 'field2', label: 'Field 2' },
       ],
       controls: controls,
       classNames: classNames,
       getOperators: (field) => [
         { name: '=', value: 'is' },
-        { name: '!=', value: 'is not' }
+        { name: '!=', value: 'is not' },
       ],
       getValueEditorType: (field, operator) => 'text',
       getInputType: (field, operator) => 'text',
       getValues: (field, operator) => [
         { name: 'one', label: 'One' },
-        { name: 'two', label: 'Two' }
+        { name: 'two', label: 'Two' },
       ],
-      onPropChange: (field, value, id) => { },
-      onRuleRemove: (ruleId, parentId) => { },
-      getLevel: () => 0
+      onPropChange: (field, value, id) => {},
+      onRuleRemove: (ruleId, parentId) => {},
+      getLevel: () => 0,
     };
     props = {
       key: 'key',
@@ -63,34 +63,34 @@ describe('<Rule />', () => {
       parentId: 'parentId',
       translations: {
         fields: {
-          title: 'Fields'
+          title: 'Fields',
         },
         operators: {
-          title: 'Operators'
+          title: 'Operators',
         },
         value: {
-          title: 'Value'
+          title: 'Value',
         },
         removeRule: {
           label: 'x',
-          title: 'Remove rule'
+          title: 'Remove rule',
         },
         removeGroup: {
           label: 'x',
-          title: 'Remove group'
+          title: 'Remove group',
         },
         addRule: {
           label: '+Rule',
-          title: 'Add rule'
+          title: 'Add rule',
         },
         addGroup: {
           label: '+Group',
-          title: 'Add group'
+          title: 'Add group',
         },
         combinators: {
-          title: 'Combinators'
-        }
-      }
+          title: 'Combinators',
+        },
+      },
     };
   });
 
@@ -112,7 +112,7 @@ describe('<Rule />', () => {
     it('should have options set to expected fields', () => {
       const expected_fields = [
         { name: 'firstName', label: 'First Label' },
-        { name: 'secondName', label: 'Second Label' }
+        { name: 'secondName', label: 'Second Label' },
       ];
       schema.fields = expected_fields;
       const dom = shallow(<Rule {...props} />);
@@ -131,7 +131,7 @@ describe('<Rule />', () => {
     it('should have options set to fields returned from "getOperators"', () => {
       const expected_operators = [
         { name: '=', label: '=' },
-        { name: '!=', label: '!=' }
+        { name: '!=', label: '!=' },
       ];
       schema.getOperators = (field) => {
         return expected_operators;
@@ -146,7 +146,7 @@ describe('<Rule />', () => {
       const dom = shallow(<Rule {...props} />);
 
       expect((dom.find(ValueSelector).props() as OperatorSelectorProps).field).to.equal(
-        'selected_field'
+        'selected_field',
       );
     });
 

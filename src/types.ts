@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, StyleSheetProperties, TextStyle, ViewStyle, NativeSyntheticEvent, NativeTouchEvent } from 'react-native';
+import { TextStyle, ViewStyle, NativeSyntheticEvent, NativeTouchEvent } from 'react-native';
 
 export interface NameLabelPair {
   name: string;
@@ -93,7 +93,7 @@ export interface ValueEditorProps extends CommonProps {
   fieldData?: Field;
   operator?: string;
   type?: ValueEditorType;
-  handleOnChange(value: { value: React.ReactText }): void
+  handleOnChange(value: { value: React.ReactText }): void;
   inputType?: string;
   values?: any[];
   value?: string;

@@ -24,7 +24,7 @@ NotToggle.displayName = 'NotToggle';
 export const styles = StyleSheet.create({
   notToggle: {},
   title: {},
-  checkbox: {}
-})
+  checkbox: {},
+});
 
 export default NotToggle;

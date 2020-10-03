@@ -10,13 +10,13 @@ describe('when calculating the level of a rule', () => {
         id: '222',
         field: 'firstName',
         value: 'Test',
-        operator: '='
+        operator: '=',
       },
       {
         id: '333',
         field: 'firstName',
         value: 'Test',
-        operator: '='
+        operator: '=',
       },
       {
         combinator: 'and',
@@ -26,25 +26,25 @@ describe('when calculating the level of a rule', () => {
             id: '555',
             field: 'firstName',
             value: 'Test',
-            operator: '='
-          }
-        ]
-      }
-    ]
+            operator: '=',
+          },
+        ],
+      },
+    ],
   };
 
-  it('should be 0 for the top level', function() {
+  it('should be 0 for the top level', function () {
     expect(getLevel('111', 0, query)).to.equal(0);
     expect(getLevel('222', 0, query)).to.equal(0);
     expect(getLevel('333', 0, query)).to.equal(0);
   });
 
-  it('should be 1 for the second level', function() {
+  it('should be 1 for the second level', function () {
     expect(getLevel('444', 0, query)).to.equal(1);
     expect(getLevel('555', 0, query)).to.equal(1);
   });
 
-  it('should handle an invalid id', function() {
+  it('should handle an invalid id', function () {
     expect(getLevel('546', 0, query)).to.equal(-1);
   });
 });

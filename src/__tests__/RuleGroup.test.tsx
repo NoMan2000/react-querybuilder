@@ -26,14 +26,14 @@ describe('<RuleGroup />', () => {
           Not
         </label>
       ),
-      rule: Rule
+      rule: Rule,
     };
     classNames = {
       combinators: 'custom-combinators-class',
       addRule: 'custom-addRule-class',
       addGroup: 'custom-addGroup-class',
       removeGroup: 'custom-removeGroup-class',
-      notToggle: 'custom-notToggle-class'
+      notToggle: 'custom-notToggle-class',
     };
     schema = {
       combinators: [],
@@ -49,7 +49,7 @@ describe('<RuleGroup />', () => {
       createRuleGroup: () => _createRuleGroup(1, 'any_parent_id', []),
       getLevel: (id) => 0,
       showCombinatorsBetweenRules: false,
-      showNotToggle: false
+      showNotToggle: false,
     };
     props = {
       id: 'id',
@@ -59,37 +59,37 @@ describe('<RuleGroup />', () => {
       schema: schema,
       translations: {
         fields: {
-          title: 'Fields'
+          title: 'Fields',
         },
         operators: {
-          title: 'Operators'
+          title: 'Operators',
         },
         value: {
-          title: 'Value'
+          title: 'Value',
         },
         removeRule: {
           label: 'x',
-          title: 'Remove rule'
+          title: 'Remove rule',
         },
         removeGroup: {
           label: 'x',
-          title: 'Remove group'
+          title: 'Remove group',
         },
         addRule: {
           label: '+Rule',
-          title: 'Add rule'
+          title: 'Add rule',
         },
         addGroup: {
           label: '+Group',
-          title: 'Add group'
+          title: 'Add group',
         },
         combinators: {
-          title: 'Combinators'
+          title: 'Combinators',
         },
         notToggle: {
-          title: 'Invert this group'
-        }
-      }
+          title: 'Invert this group',
+        },
+      },
     };
   });
 
@@ -110,7 +110,7 @@ describe('<RuleGroup />', () => {
     it('should have options set to expected combinators', () => {
       const expected_combinators = [
         { name: 'and', label: 'AND' },
-        { name: 'or', label: 'OR' }
+        { name: 'or', label: 'OR' },
       ];
       schema.combinators = expected_combinators;
       const dom = shallow(<RuleGroup {...props} />);
@@ -130,7 +130,7 @@ describe('<RuleGroup />', () => {
     behavesLikeAnElementWithClassNames(
       ValueSelector,
       'ruleGroup-combinators',
-      'custom-combinators-class'
+      'custom-combinators-class',
     );
   });
 
@@ -215,7 +215,7 @@ describe('<RuleGroup />', () => {
           parentId={props.parentId}
           schema={{ ...props.schema, isRuleGroup: () => true }}
           translations={props.translations}
-        />
+        />,
       );
       const groupProps = dom.find(RuleGroup).props();
       expect(groupProps.rules).to.be.undefined;
@@ -254,9 +254,9 @@ describe('<RuleGroup />', () => {
             id: idOfNestedRuleGroup,
             combinator: 'and',
             rules: [],
-            not: true
-          }
-        ]
+            not: true,
+          },
+        ],
       };
       propsWithNestedRuleGroup.schema.isRuleGroup = () => true;
 
@@ -343,7 +343,7 @@ describe('<RuleGroup />', () => {
       props.rules = [
         { id: 'g-test1', rules: [], combinator: 'and' },
         { id: 'r-test', field: 'test', value: 'Test', operator: '=' },
-        { id: 'g-test2', rules: [], combinator: 'and' }
+        { id: 'g-test2', rules: [], combinator: 'and' },
       ];
       const dom = shallow(<RuleGroup {...props} />);
       const sc = dom.find('.ruleGroup-combinators');
@@ -395,7 +395,7 @@ describe('<RuleGroup />', () => {
   function behavesLikeAnElementWithClassNames(
     element: React.ComponentType<ActionProps & ValueSelectorProps & { rules: [] }>,
     defaultClassName: string,
-    customClassName: string
+    customClassName: string,
   ) {
     it('should have the default className', () => {
       const dom = shallow(<RuleGroup {...props} />);
@@ -426,7 +426,7 @@ describe('<RuleGroup />', () => {
       id: 'rule_id_' + index,
       field: 'field_' + index,
       operator: 'operator_' + index,
-      value: 'value_' + index
+      value: 'value_' + index,
     };
   }
 
@@ -434,7 +434,7 @@ describe('<RuleGroup />', () => {
     return {
       id: 'rule_group_id_' + index,
       parentId: parentId,
-      rules: rules
+      rules: rules,
     };
   }
 });

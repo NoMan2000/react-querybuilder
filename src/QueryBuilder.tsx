@@ -2,7 +2,7 @@ import arrayFindIndex from 'array-find-index';
 import cloneDeep from 'lodash/cloneDeep';
 import { nanoid } from 'nanoid';
 import objectAssign from 'object-assign';
-import React, { useEffect, useState } from 'react';
+import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { ActionElement, NotToggle, ValueEditor, ValueSelector } from './controls';
 import { Rule } from './Rule';
@@ -14,42 +14,42 @@ import {
   QueryBuilderProps,
   RuleGroupType,
   RuleType,
-  Translations
+  Translations,
 } from './types';
 import { findRule, generateValidQuery, getLevel, isRuleGroup } from './utils';
 
 const defaultTranslations: Translations = {
   fields: {
-    title: 'Fields'
+    title: 'Fields',
   },
   operators: {
-    title: 'Operators'
+    title: 'Operators',
   },
   value: {
-    title: 'Value'
+    title: 'Value',
   },
   removeRule: {
     label: 'x',
-    title: 'Remove rule'
+    title: 'Remove rule',
   },
   removeGroup: {
     label: 'x',
-    title: 'Remove group'
+    title: 'Remove group',
   },
   addRule: {
     label: '+Rule',
-    title: 'Add rule'
+    title: 'Add rule',
   },
   addGroup: {
     label: '+Group',
-    title: 'Add group'
+    title: 'Add group',
   },
   combinators: {
-    title: 'Combinators'
+    title: 'Combinators',
   },
   notToggle: {
-    title: 'Invert this group'
-  }
+    title: 'Invert this group',
+  },
 };
 
 const defaultOperators: NameLabelPair[] = [
@@ -68,12 +68,12 @@ const defaultOperators: NameLabelPair[] = [
   { name: 'endsWith', label: 'ends with' },
   { name: 'doesNotContain', label: 'does not contain' },
   { name: 'doesNotBeginWith', label: 'does not begin with' },
-  { name: 'doesNotEndWith', label: 'does not end with' }
+  { name: 'doesNotEndWith', label: 'does not end with' },
 ];
 
 const defaultCombinators: NameLabelPair[] = [
   { name: 'and', label: 'AND' },
-  { name: 'or', label: 'OR' }
+  { name: 'or', label: 'OR' },
 ];
 
 const defaultControlClassnames: Classnames = {
@@ -89,7 +89,7 @@ const defaultControlClassnames: Classnames = {
   fields: '',
   operators: '',
   value: '',
-  removeRule: ''
+  removeRule: '',
 };
 
 const defaultControlElements: Controls = {
@@ -103,7 +103,7 @@ const defaultControlElements: Controls = {
   valueEditor: ValueEditor,
   notToggle: NotToggle,
   ruleGroup: RuleGroup,
-  rule: Rule
+  rule: Rule,
 };
 
 export const QueryBuilder: React.FC<QueryBuilderProps> = ({
@@ -122,14 +122,14 @@ export const QueryBuilder: React.FC<QueryBuilderProps> = ({
   showCombinatorsBetweenRules = false,
   showNotToggle = false,
   resetOnFieldChange = true,
-  resetOnOperatorChange = false
+  resetOnOperatorChange = false,
 }) => {
   /**
    * Gets the initial query
    */
-  const getInitialQuery = () => {
+  const getInitialQuery = React.useCallback(() => {
     return (query && generateValidQuery(query)) || createRuleGroup();
-  };
+  }, [query, createRuleGroup]);
 
   const createRule = (): RuleType => {
     const field = fields[0].name;
@@ -138,18 +138,18 @@ export const QueryBuilder: React.FC<QueryBuilderProps> = ({
       id: `r-${nanoid()}`,
       field,
       value: '',
-      operator: getOperatorsMain(field)[0].name
+      operator: getOperatorsMain(field)[0].name,
     };
   };
 
-  const createRuleGroup = (): RuleGroupType => {
+  const createRuleGroup = React.useCallback((): RuleGroupType => {
     return {
       id: `g-${nanoid()}`,
       rules: [],
       combinator: combinators[0].name,
-      not: false
+      not: false,
     };
-  };
+  }, [combinators]);
 
   /**
    * Gets the ValueEditor type for a given field and operator
@@ -157,7 +157,9 @@ export const QueryBuilder: React.FC<QueryBuilderProps> = ({
   const getValueEditorTypeMain = (field: string, operator: string) => {
     if (getValueEditorType) {
       const vet = getValueEditorType(field, operator);
-      if (vet) return vet;
+      if (vet) {
+        return vet;
+      }
     }
 
     return 'text';
@@ -169,7 +171,9 @@ export const QueryBuilder: React.FC<QueryBuilderProps> = ({
   const getInputTypeMain = (field: string, operator: string) => {
     if (getInputType) {
       const inputType = getInputType(field, operator);
-      if (inputType) return inputType;
+      if (inputType) {
+        return inputType;
+      }
     }
 
     return 'text';
@@ -181,7 +185,9 @@ export const QueryBuilder: React.FC<QueryBuilderProps> = ({
   const getValuesMain = (field: string, operator: string) => {
     if (getValues) {
       const vals = getValues(field, operator);
-      if (vals) return vals;
+      if (vals) {
+        return vals;
+      }
     }
 
     return [];
@@ -193,7 +199,9 @@ export const QueryBuilder: React.FC<QueryBuilderProps> = ({
   const getOperatorsMain = (field: string) => {
     if (getOperators) {
       const ops = getOperators(field);
-      if (ops) return ops;
+      if (ops) {
+        return ops;
+      }
     }
 
     return operators;
@@ -227,7 +235,7 @@ export const QueryBuilder: React.FC<QueryBuilderProps> = ({
     if (parent) {
       parent.rules.push({
         ...rule,
-        value: getRuleDefaultValue(rule)
+        value: getRuleDefaultValue(rule),
       });
       setRoot(rootCopy);
       _notifyQueryChange(rootCopy);
@@ -259,13 +267,13 @@ export const QueryBuilder: React.FC<QueryBuilderProps> = ({
       if (resetOnFieldChange && prop === 'field') {
         objectAssign(rule, {
           operator: getOperatorsMain(rule.field)[0].name,
-          value: getRuleDefaultValue(rule)
+          value: getRuleDefaultValue(rule),
         });
       }
 
       if (resetOnOperatorChange && prop === 'operator') {
         Object.assign(rule, {
-          value: getRuleDefaultValue(rule)
+          value: getRuleDefaultValue(rule),
         });
       }
 
@@ -318,15 +326,18 @@ export const QueryBuilder: React.FC<QueryBuilderProps> = ({
   /**
    * Executes the `onQueryChange` function, if provided
    */
-  const _notifyQueryChange = (newRoot: RuleGroupType) => {
-    /* istanbul ignore else */
-    if (onQueryChange) {
-      const newQuery = cloneDeep(newRoot);
-      onQueryChange(newQuery);
-    }
-  };
+  const _notifyQueryChange = React.useCallback(
+    (newRoot: RuleGroupType) => {
+      /* istanbul ignore else */
+      if (onQueryChange) {
+        const newQuery = cloneDeep(newRoot);
+        onQueryChange(newQuery);
+      }
+    },
+    [onQueryChange],
+  );
 
-  const [root, setRoot] = useState(getInitialQuery() as RuleGroupType);
+  const [root, setRoot] = React.useState(getInitialQuery() as RuleGroupType);
 
   const schema = {
     fields,
@@ -347,18 +358,18 @@ export const QueryBuilder: React.FC<QueryBuilderProps> = ({
     getInputType: getInputTypeMain,
     getValues: getValuesMain,
     showCombinatorsBetweenRules,
-    showNotToggle
+    showNotToggle,
   };
 
   // Set the query state when a new query prop comes in
-  useEffect(() => {
+  React.useEffect(() => {
     setRoot(generateValidQuery(query || getInitialQuery()) as RuleGroupType);
-  }, [query]);
+  }, [getInitialQuery, query]);
 
   // Notify a query change on mount
-  useEffect(() => {
+  React.useEffect(() => {
     _notifyQueryChange(root);
-  }, []);
+  }, [_notifyQueryChange, root]);
 
   return (
     <View style={styles.wrapper}>
@@ -375,8 +386,7 @@ export const QueryBuilder: React.FC<QueryBuilderProps> = ({
 };
 
 export const styles = StyleSheet.create({
-  wrapper: {
-  }
+  wrapper: {},
 });
 
 QueryBuilder.displayName = 'QueryBuilder';
