@@ -1,6 +1,6 @@
 import arrayFind from 'array-find';
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, NativeSyntheticEvent, NativeTouchEvent } from 'react-native';
 import { RuleProps } from './types';
 
 export const Rule: React.FC<RuleProps> = ({
@@ -39,11 +39,9 @@ export const Rule: React.FC<RuleProps> = ({
     onElementChanged('value', value);
   };
 
-  const removeRule = (event: React.MouseEvent<Element, MouseEvent>) => {
-    event.preventDefault();
-    event.stopPropagation();
-
-    onRuleRemove(id, parentId);
+  const removeRule = (ev: NativeSyntheticEvent<NativeTouchEvent>) => {
+    console.log(ev);
+    // onRuleRemove(id, parentId);
   };
 
   const fieldData = arrayFind(fields, (f) => f.name === field);
@@ -87,7 +85,7 @@ export const Rule: React.FC<RuleProps> = ({
         label={translations.removeRule.label}
         title={translations.removeRule.title}
         style={styles.removeRuleAction}
-        handleOnClick={removeRule}
+        handleOnClick={(ev: NativeSyntheticEvent<NativeTouchEvent>) => {removeRule(ev)}}
         level={level}
       />
     </View>

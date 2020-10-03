@@ -1,11 +1,20 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { default as QueryBuilder } from './src/index';
 
 export default function App() {
+  // TODO:  Use the query for something.
+  const [query, setQuery] = React.useState({});
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+      <QueryBuilder fields={[{
+        name: 'Select one',
+        label: 'one',
+        id: 'one',
+        combinator=''
+      }]}
+      onQueryChange={setQuery} />
       <StatusBar style="auto" />
     </View>
   );

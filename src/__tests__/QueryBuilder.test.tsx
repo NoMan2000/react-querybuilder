@@ -45,7 +45,7 @@ describe('<QueryBuilder />', () => {
     let wrapper: ReactWrapper, queryChange;
 
     beforeEach(() => {
-      queryChange = sinon.spy();
+      queryChange = jest.fn();
       act(() => {
         wrapper = mount(<QueryBuilder {...props} onQueryChange={queryChange} />);
       });

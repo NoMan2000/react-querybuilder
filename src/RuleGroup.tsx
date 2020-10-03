@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, NativeSyntheticEvent, NativeTouchEvent } from 'react-native';
 import { RuleGroupProps } from './types';
 
 export const RuleGroup: React.FC<RuleGroupProps> = ({
@@ -37,25 +37,19 @@ export const RuleGroup: React.FC<RuleGroupProps> = ({
     onPropChange('not', checked, id);
   };
 
-  const addRule = (event: React.MouseEvent<Element, MouseEvent>) => {
-    event.preventDefault();
-    event.stopPropagation();
-
+  const addRule = (event: NativeSyntheticEvent<NativeTouchEvent>) => {
+    console.log({event, from: 'addRule' });
     const newRule = createRule();
     onRuleAdd(newRule, id);
   };
 
-  const addGroup = (event: React.MouseEvent<Element, MouseEvent>) => {
-    event.preventDefault();
-    event.stopPropagation();
+  const addGroup = (event: NativeSyntheticEvent<NativeTouchEvent>) => {
 
     const newGroup = createRuleGroup();
     onGroupAdd(newGroup, id);
   };
 
-  const removeGroup = (event: React.MouseEvent<Element, MouseEvent>) => {
-    event.preventDefault();
-    event.stopPropagation();
+  const removeGroup = (event: NativeSyntheticEvent<NativeTouchEvent>) => {
 
     onGroupRemove(id, parentId || /* istanbul ignore next */ '');
   };

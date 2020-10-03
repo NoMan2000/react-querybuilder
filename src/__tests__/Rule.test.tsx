@@ -1,7 +1,5 @@
-import { expect } from 'chai';
 import { mount, shallow } from 'enzyme';
-import React from 'react';
-import sinon from 'sinon';
+import * as React from 'react';
 import { ActionElement, ValueEditor, ValueSelector } from '../controls/index';
 import { Rule } from '../Rule';
 import { OperatorSelectorProps } from '../types';
@@ -11,6 +9,7 @@ describe('<Rule />', () => {
   beforeEach(() => {
     //set defaults
     controls = {
+      // TODO:  Remove the HTML selectors.
       fieldSelector: (props) => (
         <select onChange={(e) => props.handleOnChange(e.target.value)}>
           <option value="field">Field</option>
@@ -50,8 +49,8 @@ describe('<Rule />', () => {
         { name: 'one', label: 'One' },
         { name: 'two', label: 'Two' }
       ],
-      onPropChange: (field, value, id) => {},
-      onRuleRemove: (ruleId, parentId) => {},
+      onPropChange: (field, value, id) => { },
+      onRuleRemove: (ruleId, parentId) => { },
       getLevel: () => 0
     };
     props = {
@@ -196,7 +195,7 @@ describe('<Rule />', () => {
 
     it('should trigger change handler', () => {
       const mockEvent = { target: { value: 'foo' } };
-      let onChange = sinon.spy();
+      let onChange = jest.fn();
       const dom = shallow(<ValueEditor level={0} handleOnChange={onChange} />);
       dom.find('input').simulate('change', mockEvent);
       expect(onChange.called).to.equal(true);

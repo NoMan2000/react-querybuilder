@@ -1,7 +1,7 @@
-import CheckBox from '@react-native-community/checkbox';
+import CheckBox from 'react-native-check-box';
 import { Picker } from '@react-native-community/picker';
-import React from 'react';
-import { StyleSheet, View, Text, GestureResponderEvent } from 'react-native';
+import * as React from 'react';
+import { StyleSheet, View, Text, GestureResponderEvent, TextInput } from 'react-native';
 import RadioButton from '../components/RadioButton';
 import { ValueEditorProps } from '../types';
 
@@ -36,6 +36,7 @@ const ValueEditor: React.FC<ValueEditorProps> = ({
   title,
   type,
   inputType,
+  disabled = false,
   values
 }) => {
   if (operator === 'null' || operator === 'notNull') {
@@ -65,10 +66,9 @@ const ValueEditor: React.FC<ValueEditorProps> = ({
             <Text>{title}</Text>
           </View>
         <CheckBox
-          disabled={false}
-          value={!!value}
-          onValueChange={(newValue) => handleOnChange(boolToText(newValue))}
-
+          disabled={disabled}
+          isChecked={!!value}
+          onClick={() => handleOnChange(boolToText(!value))}
         />
         </View>
       );
@@ -93,12 +93,13 @@ const ValueEditor: React.FC<ValueEditorProps> = ({
 
     default:
       return (
-        <input
-          type={inputType || 'text'}
+        <View>
+          <View><Text>{title}</Text></View>
+        <TextInput
           value={value}
-          title={title}
-          onChange={(e) => handleOnChange(e.target.value)}
+          onChange={(e) => handleOnChange(e.target)}
         />
+        </View>
       );
   }
 };

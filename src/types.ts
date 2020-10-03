@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, StyleSheetProperties, TextStyle, ViewStyle } from 'react-native';
+import { StyleSheet, StyleSheetProperties, TextStyle, ViewStyle, NativeSyntheticEvent, NativeTouchEvent } from 'react-native';
 
 export interface NameLabelPair {
   name: string;
@@ -48,7 +48,7 @@ export interface CommonProps {
 
 export interface ActionProps extends CommonProps {
   label?: string;
-  handleOnClick(e: React.MouseEvent): void;
+  handleOnClick(ev: NativeSyntheticEvent<NativeTouchEvent>): void;
 }
 
 export interface ActionWithRulesProps extends ActionProps {
@@ -96,6 +96,7 @@ export interface ValueEditorProps extends SelectorEditorProps {
   inputType?: string;
   values?: any[];
   style?: ViewStyle;
+  disabled?: boolean;
 }
 
 export interface Controls {
