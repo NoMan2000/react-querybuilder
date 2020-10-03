@@ -70,7 +70,6 @@ export const RuleGroup: React.FC<RuleGroupProps> = ({
             options={combinators}
             value={combinator}
             title={translations.combinators.title}
-            className={`ruleGroup-combinators ${classNames.combinators}`}
             handleOnChange={onCombinatorChange}
             rules={rules}
             level={level}
@@ -78,7 +77,6 @@ export const RuleGroup: React.FC<RuleGroupProps> = ({
         )}
         {!showNotToggle ? null : (
           <controls.notToggle
-            className={`ruleGroup-notToggle ${classNames.notToggle}`}
             title={translations.notToggle.title}
             checked={not}
             handleOnChange={onNotToggleChange}
@@ -88,7 +86,6 @@ export const RuleGroup: React.FC<RuleGroupProps> = ({
         <controls.addRuleAction
           label={translations.addRule.label}
           title={translations.addRule.title}
-          className={`ruleGroup-addRule ${classNames.addRule}`}
           handleOnClick={addRule}
           rules={rules}
           level={level}
@@ -96,7 +93,6 @@ export const RuleGroup: React.FC<RuleGroupProps> = ({
         <controls.addGroupAction
           label={translations.addGroup.label}
           title={translations.addGroup.title}
-          className={`ruleGroup-addGroup ${classNames.addGroup}`}
           handleOnClick={addGroup}
           rules={rules}
           level={level}
@@ -105,7 +101,6 @@ export const RuleGroup: React.FC<RuleGroupProps> = ({
           <controls.removeGroupAction
             label={translations.removeGroup.label}
             title={translations.removeGroup.title}
-            className={`ruleGroup-remove ${classNames.removeGroup}`}
             handleOnClick={removeGroup}
             rules={rules}
             level={level}

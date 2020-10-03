@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, StyleSheetProperties, TextStyle, ViewStyle } from 'react-native';
 
 export interface NameLabelPair {
   name: string;
@@ -35,7 +35,7 @@ export interface CommonProps {
   /**
    * Style rules to apply.
    */
-  style?: StyleSheet;
+  style?: ViewStyle | TextStyle;
   /**
    * The level of the current group
    */
@@ -60,7 +60,7 @@ export interface ActionWithRulesProps extends ActionProps {
 
 export interface SelectorEditorProps extends CommonProps {
   value?: string;
-  handleOnChange(value: any): void;
+  handleOnChange(value: React.ReactText, index?: number): void;
 }
 
 export interface ValueSelectorProps extends SelectorEditorProps {
@@ -95,6 +95,7 @@ export interface ValueEditorProps extends SelectorEditorProps {
   type?: ValueEditorType;
   inputType?: string;
   values?: any[];
+  style?: ViewStyle;
 }
 
 export interface Controls {
