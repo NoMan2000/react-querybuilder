@@ -1,7 +1,7 @@
 import arrayFind from 'array-find';
 import React from 'react';
 import { View, StyleSheet, NativeSyntheticEvent, NativeTouchEvent } from 'react-native';
-import { RuleProps } from './types';
+import { RuleProps, Field } from './types';
 
 export const Rule: React.FC<RuleProps> = ({
   id,
@@ -11,7 +11,6 @@ export const Rule: React.FC<RuleProps> = ({
   value,
   translations,
   schema: {
-    classNames,
     controls,
     fields,
     getInputType,
@@ -24,24 +23,29 @@ export const Rule: React.FC<RuleProps> = ({
   }
 }) => {
   const onElementChanged = (property: string, value: any) => {
+    console.log('onElementChanged', { property, value });
     onPropChange(property, value, id);
   };
 
   const onFieldChanged = (value: any) => {
+    console.log('onFieldChanged', value);
     onElementChanged('field', value);
   };
 
   const onOperatorChanged = (value: any) => {
+    console.log('onOperatorChanged', value);
     onElementChanged('operator', value);
   };
 
-  const onValueChanged = (value: any) => {
-    onElementChanged('value', value);
+  const onValueChanged = (value: any, alsoRan: any) => {
+    debugger;
+    console.log('onValueChanged', {value: value.value, alsoRan});
+    onElementChanged('value', value.value);
   };
 
-  const removeRule = (ev: NativeSyntheticEvent<NativeTouchEvent>) => {
-    console.log(ev);
-    // onRuleRemove(id, parentId);
+  const removeRule = (ev: NativeSyntheticEvent<NativeTouchEvent>, fieldName: string, field?: Field) => {
+    debugger;
+    onRuleRemove(id, parentId);
   };
 
   const fieldData = arrayFind(fields, (f) => f.name === field);
@@ -85,7 +89,7 @@ export const Rule: React.FC<RuleProps> = ({
         label={translations.removeRule.label}
         title={translations.removeRule.title}
         style={styles.removeRuleAction}
-        handleOnClick={(ev: NativeSyntheticEvent<NativeTouchEvent>) => {removeRule(ev)}}
+        handleOnClick={(ev: NativeSyntheticEvent<NativeTouchEvent>) => {removeRule(ev, field, fieldData)}}
         level={level}
       />
     </View>
@@ -95,8 +99,14 @@ export const Rule: React.FC<RuleProps> = ({
 Rule.displayName = 'Rule';
 
 export const styles = StyleSheet.create({
-  header: {},
-  fieldSelector: {},
+  header: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  fieldSelector: {
+    margin: '10 10'
+  },
   operatorSelector: {},
   valueEditor: {},
   removeRuleAction: {}
