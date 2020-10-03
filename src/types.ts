@@ -88,13 +88,15 @@ export interface OperatorSelectorProps extends ValueSelectorProps {
   options: NameLabelPair[];
 }
 
-export interface ValueEditorProps extends SelectorEditorProps {
+export interface ValueEditorProps extends CommonProps {
   field?: string;
   fieldData?: Field;
   operator?: string;
   type?: ValueEditorType;
+  handleOnChange(value: { value: React.ReactText }): void
   inputType?: string;
   values?: any[];
+  value?: string;
   style?: ViewStyle;
   disabled?: boolean;
 }

@@ -37,14 +37,11 @@ export const Rule: React.FC<RuleProps> = ({
     onElementChanged('operator', value);
   };
 
-  const onValueChanged = (value: any, alsoRan: any) => {
-    debugger;
-    console.log('onValueChanged', {value: value.value, alsoRan});
+  const onValueChanged = (value: { value: string }) => {
     onElementChanged('value', value.value);
   };
 
   const removeRule = (ev: NativeSyntheticEvent<NativeTouchEvent>, fieldName: string, field?: Field) => {
-    debugger;
     onRuleRemove(id, parentId);
   };
 
@@ -52,46 +49,50 @@ export const Rule: React.FC<RuleProps> = ({
   const level = getLevel(id);
 
   return (
-    <View style={styles.header}>
-      <controls.fieldSelector
-        options={fields}
-        title={translations.fields.title}
-        value={field}
-        operator={operator}
-        style={styles.fieldSelector}
-        handleOnChange={onFieldChanged}
-        level={level}
-      />
-      <controls.operatorSelector
-        field={field}
-        fieldData={fieldData}
-        title={translations.operators.title}
-        options={getOperators(field)}
-        value={operator}
-        style={styles.operatorSelector}
-        handleOnChange={onOperatorChanged}
-        level={level}
-      />
-      <controls.valueEditor
-        field={field}
-        fieldData={fieldData}
-        title={translations.value.title}
-        operator={operator}
-        value={value}
-        type={getValueEditorType(field, operator)}
-        inputType={getInputType(field, operator)}
-        values={getValues(field, operator)}
-        style={styles.valueEditor}
-        handleOnChange={onValueChanged}
-        level={level}
-      />
-      <controls.removeRuleAction
-        label={translations.removeRule.label}
-        title={translations.removeRule.title}
-        style={styles.removeRuleAction}
-        handleOnClick={(ev: NativeSyntheticEvent<NativeTouchEvent>) => {removeRule(ev, field, fieldData)}}
-        level={level}
-      />
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <controls.fieldSelector
+          options={fields}
+          title={translations.fields.title}
+          value={field}
+          operator={operator}
+          style={styles.fieldSelector}
+          handleOnChange={onFieldChanged}
+          level={level}
+        />
+        <controls.operatorSelector
+          field={field}
+          fieldData={fieldData}
+          title={translations.operators.title}
+          options={getOperators(field)}
+          value={operator}
+          style={styles.operatorSelector}
+          handleOnChange={onOperatorChanged}
+          level={level}
+        />
+        <controls.valueEditor
+          field={field}
+          fieldData={fieldData}
+          title={translations.value.title}
+          operator={operator}
+          value={value}
+          type={getValueEditorType(field, operator)}
+          inputType={getInputType(field, operator)}
+          values={getValues(field, operator)}
+          style={styles.valueEditor}
+          handleOnChange={onValueChanged}
+          level={level}
+        />
+      </View>
+      <View style={styles.container}>
+        <controls.removeRuleAction
+          label={translations.removeRule.label}
+          title={translations.removeRule.title}
+          style={styles.removeRuleAction}
+          handleOnClick={(ev: NativeSyntheticEvent<NativeTouchEvent>) => { removeRule(ev, field, fieldData) }}
+          level={level}
+        />
+      </View>
     </View>
   );
 };
@@ -101,13 +102,24 @@ Rule.displayName = 'Rule';
 export const styles = StyleSheet.create({
   header: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'space-between'
+  },
+  container: {
+    flex: 1,
+    flexDirection: 'row',
+    margin: '10 5'
   },
   fieldSelector: {
     margin: '10 10'
   },
   operatorSelector: {},
   valueEditor: {},
+  removeRuleActionContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignContent: 'space-between'
+  },
   removeRuleAction: {}
 });
