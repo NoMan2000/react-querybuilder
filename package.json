@@ -8,18 +8,30 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@react-native-community/checkbox": "^0.5.4",
+    "@react-native-community/picker": "^1.8.0",
+    "array-find": "^1.0.0",
+    "array-find-index": "^1.0.2",
     "expo": "~39.0.2",
     "expo-status-bar": "~1.0.2",
+    "lodash": "^4.17.20",
+    "nanoid": "^3.1.12",
+    "object-assign": "^4.1.1",
+    "prop-types": "^15.6.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.2.tar.gz",
     "react-native-web": "~0.13.12"
   },
   "devDependencies": {
-    "react-native-web": "~0.13.7",
+    "@types/array-find-index": "^1.0.0",
+    "@types/lodash": "^4.14.161",
+    "@types/nanoid": "^2.1.0",
+    "@types/object-assign": "^4.0.30",
     "@types/react": "~16.9.35",
     "@types/react-dom": "~16.9.8",
     "@types/react-native": "~0.63.2",
+    "react-native-web": "~0.13.7",
     "typescript": "~3.9.5"
   },
   "private": true
