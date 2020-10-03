@@ -8,12 +8,11 @@ export default function App() {
   const [query, setQuery] = React.useState({});
   return (
     <View style={styles.container}>
-      <QueryBuilder fields={[{
-        name: 'Select one',
-        label: 'one',
-        id: 'one',
-        combinator=''
-      }]}
+      <QueryBuilder combinator='and' fields={[
+      { name: 'firstName', label: 'First Name' },
+      { name: 'lastName', label: 'Last Name' },
+      { name: 'age', label: 'Age' }
+    ];}
       onQueryChange={setQuery} />
       <StatusBar style="auto" />
     </View>

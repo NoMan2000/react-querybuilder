@@ -1,9 +1,7 @@
-import { expect } from 'chai';
 import { mount, ReactWrapper } from 'enzyme';
 import { cloneDeep } from 'lodash';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import sinon from 'sinon';
 import { ActionElement } from '../controls';
 import { QueryBuilder } from '../QueryBuilder';
 import { Rule } from '../Rule';
@@ -17,7 +15,7 @@ describe('<QueryBuilder />', () => {
   };
 
   it('should exist', () => {
-    expect(QueryBuilder).to.exist;
+    expect(QueryBuilder.name).toBe('QueryBuilder');
   });
 
   describe('when rendered', () => {
@@ -279,7 +277,7 @@ describe('<QueryBuilder />', () => {
     };
 
     beforeEach(() => {
-      getOperators = sinon.spy((fields, wada = 123) => {
+      getOperators = jest.fn((fields, wada = 123) => {
         return [
           { name: 'custom-operator-1', label: 'Op. 1' },
           { name: 'custom-operator-2', label: 'Op. 2' },
@@ -334,7 +332,7 @@ describe('<QueryBuilder />', () => {
     };
 
     beforeEach(() => {
-      getValueEditorType = sinon.spy(() => 'text');
+      getValueEditorType = jest.fn(() => 'text');
       wrapper = mount(
         <QueryBuilder
           {...props}
@@ -388,7 +386,7 @@ describe('<QueryBuilder />', () => {
     };
 
     beforeEach(() => {
-      getInputType = sinon.spy(() => 'text');
+      getInputType = jest.fn(() => 'text');
       wrapper = mount(
         <QueryBuilder {...props} query={query} fields={fields} getInputType={getInputType} />
       );
@@ -438,7 +436,7 @@ describe('<QueryBuilder />', () => {
     };
 
     beforeEach(() => {
-      getValues = sinon.spy(() => [{ name: 'test', label: 'Test' }]);
+      getValues = jest.fn(() => [{ name: 'test', label: 'Test' }]);
       wrapper = mount(
         <QueryBuilder
           {...props}
@@ -484,7 +482,7 @@ describe('<QueryBuilder />', () => {
     ];
 
     beforeEach(() => {
-      onQueryChange = sinon.spy();
+      onQueryChange = jest.fn();
       wrapper = mount(<QueryBuilder fields={fields} onQueryChange={onQueryChange} />);
     });
 
@@ -609,7 +607,7 @@ describe('<QueryBuilder />', () => {
     ];
 
     beforeEach(() => {
-      onQueryChange = sinon.spy();
+      onQueryChange = jest.fn();
       wrapper = mount(<QueryBuilder fields={fields} onQueryChange={onQueryChange} />);
     });
 
