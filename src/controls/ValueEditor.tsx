@@ -36,6 +36,7 @@ const ValueEditor: React.FC<ValueEditorProps> = ({
   type,
   disabled = false,
   values,
+  dense,
 }) => {
   if (operator === 'null' || operator === 'notNull') {
     return null;
@@ -96,6 +97,7 @@ const ValueEditor: React.FC<ValueEditorProps> = ({
       return (
         <View>
           <TextInput
+            dense={dense}
             label={title}
             value={value}
             onChangeText={(text: string) => handleOnChange(text)}
@@ -106,9 +108,15 @@ const ValueEditor: React.FC<ValueEditorProps> = ({
 };
 
 ValueEditor.displayName = 'ValueEditor';
+ValueEditor.defaultProps = {
+  dense: true,
+};
 
 export const styles = StyleSheet.create({
   select: {},
+  textWrapper: {
+    marginVertical: 10,
+  },
 });
 
 export default ValueEditor;

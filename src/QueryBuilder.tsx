@@ -1,6 +1,6 @@
 import arrayFindIndex from 'array-find-index';
 import cloneDeep from 'lodash/cloneDeep';
-import { nanoid } from 'nanoid';
+import { nanoid } from 'nanoid/non-secure';
 import objectAssign from 'object-assign';
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';

@@ -1,4 +1,3 @@
-/* eslint-disable no-debugger */
 import arrayFind from 'array-find';
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
@@ -36,8 +35,7 @@ export const Rule: React.FC<RuleProps> = ({
   };
 
   const onValueChanged = (passedValue: string) => {
-    console.log({ passedValue });
-    onElementChanged('onValueChanged', passedValue);
+    onElementChanged('value', passedValue);
   };
 
   const removeRule = () => {
@@ -83,7 +81,7 @@ export const Rule: React.FC<RuleProps> = ({
           level={level}
         />
       </View>
-      <View style={styles.container}>
+      <View style={styles.removeRuleActionContainer}>
         <controls.removeRuleAction
           label={translations.removeRule.label}
           title={translations.removeRule.title}
@@ -103,11 +101,14 @@ export const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-between',
+    marginVertical: 15,
   },
   container: {
     flex: 1,
     flexDirection: 'row',
     margin: '10 5',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   fieldSelector: {
     margin: '10 10',
@@ -116,9 +117,9 @@ export const styles = StyleSheet.create({
   valueEditor: {},
   removeRuleActionContainer: {
     flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignContent: 'space-between',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignContent: 'center',
   },
   removeRuleAction: {},
 });

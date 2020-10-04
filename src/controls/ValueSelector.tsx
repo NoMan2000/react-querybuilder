@@ -1,14 +1,15 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { ValueSelectorProps } from '../types';
 import { Picker } from '@react-native-community/picker';
+import { Paragraph, Text } from 'react-native-paper';
 
 const ValueSelector: React.FC<ValueSelectorProps> = ({ handleOnChange, options, title, value }) => {
   return (
-    <View>
-      <View>
+    <View style={styles.container}>
+      <Paragraph>
         <Text>{title}</Text>
-      </View>
+      </Paragraph>
       <Picker
         style={styles.select}
         selectedValue={value}
@@ -26,6 +27,9 @@ ValueSelector.displayName = 'ValueSelector';
 
 export const styles = StyleSheet.create({
   select: {},
+  container: {
+    marginBottom: 10,
+  },
 });
 
 export default ValueSelector;

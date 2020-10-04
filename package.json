@@ -19,6 +19,7 @@
     "array-find-index": "^1.0.2",
     "eslint": "^7.10.0",
     "expo": "~39.0.2",
+    "expo-random": "~9.0.0",
     "expo-status-bar": "~1.0.2",
     "lodash": "^4.17.20",
     "nanoid": "^3.1.12",

@@ -99,6 +99,7 @@ export interface ValueEditorProps extends CommonProps {
   value?: string;
   style?: ViewStyle;
   disabled?: boolean;
+  dense?: boolean;
 }
 
 export interface Controls {

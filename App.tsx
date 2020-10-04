@@ -74,11 +74,23 @@ export default function App() {
       </View>
       <StatusBar style="auto" />
 
-      <View style={styles.horizontalContainer}>
-        <TextInput label="Field value" value={field.name} onChangeText={changeFieldName} />
-        <TextInput label={'Field Name'} value={field.label} onChangeText={changeFieldLabel} />
+      <View style={styles.fieldWrapper}>
+        <TextInput
+          style={styles.fieldName}
+          label={'Field Name'}
+          value={field.label}
+          onChangeText={changeFieldLabel}
+          dense
+        />
+        <TextInput
+          style={styles.fieldValue}
+          label="Field value"
+          value={field.name}
+          onChangeText={changeFieldName}
+          dense
+        />
         <View>
-          <Button onPress={addFields} title={`Add Field ${field.name}`} />
+          <Button onPress={addFields} title={'Add Field'} />
         </View>
       </View>
       <Card>
@@ -112,5 +124,17 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontWeight: 'bold',
     fontSize: 22,
+  },
+  fieldWrapper: {
+    flex: 1,
+    justifyContent: 'center',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  fieldValue: {
+    marginRight: 15,
+  },
+  fieldName: {
+    marginRight: 15,
   },
 });
