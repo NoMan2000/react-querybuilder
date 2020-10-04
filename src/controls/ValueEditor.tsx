@@ -1,9 +1,8 @@
-import CheckBox from 'react-native-check-box';
 import { Picker } from '@react-native-community/picker';
 import * as React from 'react';
-import { StyleSheet, View, Text, GestureResponderEvent, TextInput } from 'react-native';
-import RadioButton from '../components/RadioButton';
+import { StyleSheet, View } from 'react-native';
 import { ValueEditorProps } from '../types';
+import { RadioButton, TextInput, Checkbox, Text } from 'react-native-paper';
 
 export const boolToText = (value: string | boolean): string => {
   if (typeof value === 'boolean') {
@@ -64,10 +63,10 @@ const ValueEditor: React.FC<ValueEditorProps> = ({
           <View>
             <Text>{title}</Text>
           </View>
-          <CheckBox
+          <Checkbox
             disabled={disabled}
-            isChecked={!!value}
-            onClick={() => handleOnChange(boolToText(!value))}
+            status={value ? 'checked' : 'unchecked'}
+            onPress={() => handleOnChange(!value)}
           />
         </View>
       );
@@ -80,13 +79,14 @@ const ValueEditor: React.FC<ValueEditorProps> = ({
           {values!.map((v) => (
             <View>
               <RadioButton
+                status={value === v.name ? 'checked' : 'unchecked'}
                 key={v.name}
-                onPress={(e: GestureResponderEvent) => handleOnChange(e.target)}
-                checked={value === v.name}
-              />
-              <View>
-                <Text>{v.label}</Text>
-              </View>
+                onPress={() => handleOnChange(v.name)}
+                value={value || ''}>
+                <View>
+                  <Text>{v.label}</Text>
+                </View>
+              </RadioButton>
             </View>
           ))}
         </View>
@@ -95,10 +95,11 @@ const ValueEditor: React.FC<ValueEditorProps> = ({
     default:
       return (
         <View>
-          <View>
-            <Text>{title}</Text>
-          </View>
-          <TextInput value={value} onChange={(e) => handleOnChange(e.target)} />
+          <TextInput
+            label={title}
+            value={value}
+            onChangeText={(text: string) => handleOnChange(text)}
+          />
         </View>
       );
   }

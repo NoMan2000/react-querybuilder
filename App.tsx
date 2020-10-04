@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
-import { TextInput } from 'react-native-paper';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { TextInput, Text, Headline, Card } from 'react-native-paper';
+import { StyleSheet, View, Button } from 'react-native';
 import { default as QueryBuilder, formatQuery } from './src/index';
 import { RuleGroupType, Field } from './types';
 
@@ -63,7 +63,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <View style={styles.headerArea}>
-        <Text style={styles.headerTitle}>Main App Entry</Text>
+        <Headline style={styles.headerTitle}>Main App Entry</Headline>
       </View>
       <View style={styles.queryBuilderWrapper}>
         <QueryBuilder
@@ -81,6 +81,12 @@ export default function App() {
           <Button onPress={addFields} title={`Add Field ${field.name}`} />
         </View>
       </View>
+      <Card>
+        <Card.Title title="Formatted Query" />
+        <Card.Content>
+          <Text>{JSON.stringify(sqlQuery)}</Text>
+        </Card.Content>
+      </Card>
     </View>
   );
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextStyle, ViewStyle, NativeSyntheticEvent, NativeTouchEvent } from 'react-native';
+import { TextStyle, ViewStyle } from 'react-native';
 
 export interface NameLabelPair {
   name: string;
@@ -48,7 +48,7 @@ export interface CommonProps {
 
 export interface ActionProps extends CommonProps {
   label?: string;
-  handleOnClick(ev: NativeSyntheticEvent<NativeTouchEvent>): void;
+  handleOnClick(): void;
 }
 
 export interface ActionWithRulesProps extends ActionProps {
@@ -93,7 +93,7 @@ export interface ValueEditorProps extends CommonProps {
   fieldData?: Field;
   operator?: string;
   type?: ValueEditorType;
-  handleOnChange(value: string | number | { value: React.ReactText }): void;
+  handleOnChange(value: boolean | string | number | { value: React.ReactText }): void;
   inputType?: string;
   values?: any[];
   value?: string;

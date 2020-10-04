@@ -24,26 +24,20 @@ export const Rule: React.FC<RuleProps> = ({
   },
 }) => {
   const onElementChanged = (property: string, passedValue: any) => {
-    debugger;
-    console.log('onElementChanged', { property, value, passedValue });
     onPropChange(property, passedValue, id);
   };
 
   const onFieldChanged = (passedValue: any) => {
-    debugger;
-    console.log('onFieldChanged', { value, passedValue });
     onElementChanged('field', passedValue);
   };
 
-  const onOperatorChanged = (passedValue: any) => {
-    debugger;
-    console.log('onOperatorChanged', { value, passedValue });
+  const onOperatorChanged = (passedValue: string) => {
     onElementChanged('operator', passedValue);
   };
 
-  const onValueChanged = (passedValue: { value: string }) => {
-    debugger;
-    onElementChanged('onValueChanged', { passedValue: passedValue.value, value });
+  const onValueChanged = (passedValue: string) => {
+    console.log({ passedValue });
+    onElementChanged('onValueChanged', passedValue);
   };
 
   const removeRule = () => {

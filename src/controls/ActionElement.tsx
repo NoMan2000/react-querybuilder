@@ -1,5 +1,7 @@
 import React from 'react';
-import { StyleSheet, Button, View, Text } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
+import { Button } from 'react-native-paper';
+
 import { ActionProps } from '../types';
 
 const ActionElement: React.FC<ActionProps> = ({ handleOnClick, label = '', title = '' }) => (
@@ -8,7 +10,9 @@ const ActionElement: React.FC<ActionProps> = ({ handleOnClick, label = '', title
       <Text>{title}</Text>
     </View>
     <View style={styles.button}>
-      <Button title={title || label} onPress={(e) => handleOnClick(e)} />
+      <Button onPress={handleOnClick} testID={title}>
+        {title || label}
+      </Button>
     </View>
     <View>
       <Text>{label}</Text>

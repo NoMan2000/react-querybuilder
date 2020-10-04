@@ -8,7 +8,6 @@ import { ActionElement, NotToggle, ValueEditor, ValueSelector } from './controls
 import { Rule } from './Rule';
 import { RuleGroup } from './RuleGroup';
 import {
-  Classnames,
   Controls,
   NameLabelPair,
   QueryBuilderProps,
@@ -75,22 +74,6 @@ const defaultCombinators: NameLabelPair[] = [
   { name: 'and', label: 'AND' },
   { name: 'or', label: 'OR' },
 ];
-
-const defaultControlClassnames: Classnames = {
-  queryBuilder: '',
-  ruleGroup: '',
-  header: '',
-  combinators: '',
-  addRule: '',
-  addGroup: '',
-  removeGroup: '',
-  notToggle: '',
-  rule: '',
-  fields: '',
-  operators: '',
-  value: '',
-  removeRule: '',
-};
 
 const defaultControlElements: Controls = {
   addGroupAction: ActionElement,
@@ -384,7 +367,9 @@ export const QueryBuilder: React.FC<QueryBuilderProps> = ({
 };
 
 export const styles = StyleSheet.create({
-  wrapper: {},
+  wrapper: {
+    flex: 1,
+  },
 });
 
 QueryBuilder.displayName = 'QueryBuilder';
