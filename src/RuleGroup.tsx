@@ -50,7 +50,7 @@ export const RuleGroup: React.FC<RuleGroupProps> = ({
 
   const removeGroup = (event: NativeSyntheticEvent<NativeTouchEvent>) => {
     console.log('removeGroup', { event });
-    onGroupRemove(id, parentId);
+    onGroupRemove(id, parentId || '');
   };
 
   const level = getLevel(id);

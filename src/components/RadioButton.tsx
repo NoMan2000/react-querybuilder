@@ -14,7 +14,7 @@ type RadioButtonProps = {
   checked?: boolean;
 };
 // TODO:  Add in an override here for the styles.
-const RadioButton = (props: RadioButtonProps) => {
+export const RadioButton = (props: RadioButtonProps) => {
   return (
     <TouchableOpacity style={styles.circle} onPress={props.onPress}>
       {props.checked ? <View style={styles.checkedCircle} /> : <View />}
@@ -22,7 +22,7 @@ const RadioButton = (props: RadioButtonProps) => {
   );
 };
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   circle: {
     height: 20,
     width: 20,

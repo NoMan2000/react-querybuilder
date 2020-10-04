@@ -49,7 +49,7 @@ const ValueEditor: React.FC<ValueEditorProps> = ({
           <View>{title}</View>
           <Picker
             style={styles.select}
-            onValueChange={(itemValue, itemIndex) => handleOnChange(itemValue, itemIndex)}
+            onValueChange={(itemValue) => handleOnChange(itemValue)}
             selectedValue={value}>
             {values!.map((v) => (
               <Picker.Item label={v.label} value={v.value} />

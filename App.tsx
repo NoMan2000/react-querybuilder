@@ -1,14 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { TextInput } from 'react-native-paper';
+import { StyleSheet, Text, View, Button } from 'react-native';
 import { default as QueryBuilder, formatQuery } from './src/index';
-import { RuleGroupType } from './types';
-
-declare var msCrypto: globalThis.Crypto;
-
-if (!globalThis.crypto) {
-  globalThis.crypto = msCrypto;
-}
+import { RuleGroupType, Field } from './types';
 
 type Params = {
   sql: string;
@@ -32,48 +27,58 @@ export interface RuleGroupType {
 
 export default function App() {
   // TODO:  Use the query for something.
-  const [query, setQuery] = React.useState<RuleGroupType>({
-    id: 'app',
-    combinator: 'and',
-    rules: [
-      {
-        field: 'app',
-        operator: 'and',
-        value: 'app',
-      },
-    ],
-  });
   const [sqlQuery, setSqlQuery] = React.useState<Params>();
+  const [fields, setFields] = React.useState<Array<Field>>([
+    { label: 'username', name: 'username', id: 'username' },
+    { label: 'email', name: 'email', id: 'email' },
+  ]);
+  const [field, setField] = React.useState<Field>({ label: '', name: '', id: '' });
 
-  const handleQuery = (query: RuleGroupType) => {
-    const rulesSet = formatQuery(query, 'parameterized') as Params;
-    setSqlQuery(rulesSet);
-    debugger;
-    setQuery(query);
-  };
+  const changeFieldName = React.useCallback(
+    (name: string) => {
+      setField({ ...field, id: name, name: name });
+    },
+    [field, setField],
+  );
+
+  const changeFieldLabel = React.useCallback(
+    (label: string) => {
+      setField({ ...field, label });
+    },
+    [field, setField],
+  );
+
+  const addFields = React.useCallback(() => {
+    setFields([...fields, field]);
+  }, [fields, setFields, field]);
+
+  const handleQuery = React.useCallback(
+    (innerQuery: RuleGroupType) => {
+      const rulesSet = formatQuery(innerQuery, 'parameterized') as Params;
+      setSqlQuery(rulesSet);
+    },
+    [setSqlQuery],
+  );
 
   return (
     <View style={styles.container}>
-      <View>
-        <Text>Main App Entry</Text>
+      <View style={styles.headerArea}>
+        <Text style={styles.headerTitle}>Main App Entry</Text>
       </View>
-      <QueryBuilder
-        fields={[
-          { name: 'firstName', label: 'First Name' },
-          { name: 'lastName', label: 'Last Name' },
-          { name: 'age', label: 'Age' },
-        ]}
-        query={query}
-        onQueryChange={handleQuery}
-      />
+      <View style={styles.queryBuilderWrapper}>
+        <QueryBuilder
+          fields={fields}
+          // query={query}
+          onQueryChange={handleQuery}
+        />
+      </View>
       <StatusBar style="auto" />
+
       <View style={styles.horizontalContainer}>
-        <Text>{sqlQuery?.sql}</Text>
-        <View style={styles.horizontalContainer}>
-          {sqlQuery?.params &&
-            sqlQuery.params.map((p) => {
-              return <Text key={p}>{p}</Text>;
-            })}
+        <TextInput label="Field value" value={field.name} onChangeText={changeFieldName} />
+        <TextInput label={'Field Name'} value={field.label} onChangeText={changeFieldLabel} />
+        <View>
+          <Button onPress={addFields} title={`Add Field ${field.name}`} />
         </View>
       </View>
     </View>
@@ -88,8 +93,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   horizontalContainer: {
-    flex: 1,
     justifyContent: 'center',
     flexDirection: 'row',
+  },
+  queryBuilderWrapper: {
+    marginTop: 15,
+    marginBottom: 15,
+  },
+  headerArea: {
+    marginBottom: 15,
+  },
+  headerTitle: {
+    fontWeight: 'bold',
+    fontSize: 22,
   },
 });

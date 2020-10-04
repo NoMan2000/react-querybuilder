@@ -118,19 +118,11 @@ export const QueryBuilder: React.FC<QueryBuilderProps> = ({
   getInputType,
   getValues,
   onQueryChange,
-  controlClassnames,
   showCombinatorsBetweenRules = false,
   showNotToggle = false,
   resetOnFieldChange = true,
   resetOnOperatorChange = false,
 }) => {
-  /**
-   * Gets the initial query
-   */
-  const getInitialQuery = React.useCallback(() => {
-    return (query && generateValidQuery(query)) || createRuleGroup();
-  }, [query, createRuleGroup]);
-
   const createRule = (): RuleType => {
     const field = fields[0].name;
 
@@ -150,6 +142,13 @@ export const QueryBuilder: React.FC<QueryBuilderProps> = ({
       not: false,
     };
   }, [combinators]);
+
+  /**
+   * Gets the initial query
+   */
+  const getInitialQuery = React.useCallback(() => {
+    return (query && generateValidQuery(query)) || createRuleGroup();
+  }, [createRuleGroup, query]);
 
   /**
    * Gets the ValueEditor type for a given field and operator
@@ -342,7 +341,6 @@ export const QueryBuilder: React.FC<QueryBuilderProps> = ({
   const schema = {
     fields,
     combinators,
-    classNames: { ...defaultControlClassnames, ...controlClassnames },
     createRule,
     createRuleGroup,
     onRuleAdd,

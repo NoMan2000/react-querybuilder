@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react-native';
-import { RadioButton } from './../../src/components/RadioButton';
+import { RadioButton } from './../../../src/components/RadioButton';
 
 import { View, StyleSheet } from 'react-native';
 
@@ -17,7 +17,7 @@ buttonStories.add('default view', () => (
 ));
 
 export const styles = StyleSheet.create({
-  mainView: { flex: 1, alignItems: 'center', justifyContent: 'center' },,
+  mainView: { flex: 1, alignItems: 'center', justifyContent: 'center' },
 });
 
 export default buttonStories;

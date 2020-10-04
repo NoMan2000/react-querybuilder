@@ -93,7 +93,7 @@ export interface ValueEditorProps extends CommonProps {
   fieldData?: Field;
   operator?: string;
   type?: ValueEditorType;
-  handleOnChange(value: { value: React.ReactText }): void;
+  handleOnChange(value: string | number | { value: React.ReactText }): void;
   inputType?: string;
   values?: any[];
   value?: string;
@@ -172,7 +172,6 @@ export interface Classnames {
 
 export interface Schema {
   fields: Field[];
-  classNames: Classnames;
   combinators: { name: string; label: string }[];
   controls: Controls;
   createRule(): RuleType;

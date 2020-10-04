@@ -1,6 +1,6 @@
 import { getStorybookUI, configure } from '@storybook/react-native';
-import { expo } from './../app.json';
 import { AppRegistry } from 'react-native';
+import { expo } from './../app.json';
 import './rn-addons';
 
 configure(() => {
@@ -10,3 +10,5 @@ configure(() => {
 const StorybookUIRoot = getStorybookUI({});
 
 AppRegistry.registerComponent(expo.name, () => StorybookUIRoot);
+
+export default StorybookUIRoot;

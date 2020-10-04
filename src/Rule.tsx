@@ -1,7 +1,7 @@
 /* eslint-disable no-debugger */
 import arrayFind from 'array-find';
 import React from 'react';
-import { View, StyleSheet, NativeSyntheticEvent, NativeTouchEvent } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { RuleProps } from './types';
 
 export const Rule: React.FC<RuleProps> = ({
@@ -94,9 +94,7 @@ export const Rule: React.FC<RuleProps> = ({
           label={translations.removeRule.label}
           title={translations.removeRule.title}
           style={styles.removeRuleAction}
-          handleOnClick={(ev: NativeSyntheticEvent<NativeTouchEvent>) => {
-            removeRule(ev, field, fieldData);
-          }}
+          handleOnClick={removeRule}
           level={level}
         />
       </View>
