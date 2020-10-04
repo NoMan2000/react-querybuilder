@@ -3,30 +3,8 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { ValueEditorProps } from '../types';
 import { RadioButton, TextInput, Checkbox, Text } from 'react-native-paper';
-
-export const boolToText = (value: string | boolean): string => {
-  if (typeof value === 'boolean') {
-    return value.toString();
-  }
-  return value;
-};
-
-export const textToBoolean = (value: string | boolean): boolean => {
-  if (typeof value === 'boolean') {
-    return value;
-  }
-  if (!value) {
-    return Boolean(value);
-  }
-  if (value === 'true') {
-    return true;
-  }
-  if (value === 'false') {
-    return false;
-  }
-  console.error('Text to boolean fails with value of ' + value);
-  return false;
-};
+import { boolToText, textToBoolean } from '../utils/convertStatusNames';
+import { StatusNames } from '../../types';
 
 const ValueEditor: React.FC<ValueEditorProps> = ({
   operator,
@@ -66,8 +44,8 @@ const ValueEditor: React.FC<ValueEditorProps> = ({
           </View>
           <Checkbox
             disabled={disabled}
-            status={value ? 'checked' : 'unchecked'}
-            onPress={() => handleOnChange(!value)}
+            status={boolToText(value as StatusNames)}
+            onPress={() => handleOnChange(textToBoolean(!value))}
           />
         </View>
       );

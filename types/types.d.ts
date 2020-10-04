@@ -309,3 +309,4 @@ export interface QueryBuilderProps {
    */
   resetOnOperatorChange?: boolean;
 }
+export type StatusNames = 'indeterminate' | 'checked' | 'unchecked';

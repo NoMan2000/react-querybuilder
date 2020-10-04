@@ -101,8 +101,8 @@ export const QueryBuilder: React.FC<QueryBuilderProps> = ({
   getInputType,
   getValues,
   onQueryChange,
-  showCombinatorsBetweenRules = false,
-  showNotToggle = false,
+  showCombinatorsBetweenRules = true,
+  showNotToggle = true,
   resetOnFieldChange = true,
   resetOnOperatorChange = false,
 }) => {

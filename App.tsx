@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
-import { TextInput, Text, Headline, Card } from 'react-native-paper';
+import { TextInput, Headline, Text, Card, Paragraph } from 'react-native-paper';
 import { StyleSheet, View, Button } from 'react-native';
 import { default as QueryBuilder, formatQuery } from './src/index';
 import { RuleGroupType, Field } from './types';
@@ -28,6 +28,10 @@ export interface RuleGroupType {
 export default function App() {
   // TODO:  Use the query for something.
   const [sqlQuery, setSqlQuery] = React.useState<Params>();
+  const [jsonQuery, setJsonQuery] = React.useState<Params>();
+  const [rawSqlQuery, setRawSqlQuery] = React.useState<Params>();
+  const [jsonNoIdsQuery, setJsonNoIdsQuery] = React.useState<Params>();
+
   const [fields, setFields] = React.useState<Array<Field>>([
     { label: 'username', name: 'username', id: 'username' },
     { label: 'email', name: 'email', id: 'email' },
@@ -55,9 +59,15 @@ export default function App() {
   const handleQuery = React.useCallback(
     (innerQuery: RuleGroupType) => {
       const rulesSet = formatQuery(innerQuery, 'parameterized') as Params;
+      const jsonRulesSet = formatQuery(innerQuery, 'json') as Params;
+      const rawSqlRulesSet = formatQuery(innerQuery, 'sql') as Params;
+      const jsonNoIdsRuleset = formatQuery(innerQuery, 'json_without_ids') as Params;
       setSqlQuery(rulesSet);
+      setJsonQuery(jsonRulesSet);
+      setRawSqlQuery(rawSqlRulesSet);
+      setJsonNoIdsQuery(jsonNoIdsRuleset);
     },
-    [setSqlQuery],
+    [setSqlQuery, setJsonQuery, setRawSqlQuery],
   );
 
   return (
@@ -96,7 +106,22 @@ export default function App() {
       <Card>
         <Card.Title title="Formatted Query" />
         <Card.Content>
-          <Text>{JSON.stringify(sqlQuery)}</Text>
+          <View>
+            <Text style={styles.headerTitle}>parameterized sql</Text>
+            <Paragraph>{JSON.stringify(sqlQuery)}</Paragraph>
+          </View>
+          <View>
+            <Text style={styles.headerTitle}>Json with Ids</Text>
+            <Paragraph>{JSON.stringify(jsonQuery)}</Paragraph>
+          </View>
+          <View>
+            <Text style={styles.headerTitle}>Raw Sql Query</Text>
+            <Paragraph>{JSON.stringify(rawSqlQuery)}</Paragraph>
+          </View>
+          <View>
+            <Text style={styles.headerTitle}>Json no ids</Text>
+            <Paragraph>{JSON.stringify(jsonNoIdsQuery)}</Paragraph>
+          </View>
         </Card.Content>
       </Card>
     </View>
